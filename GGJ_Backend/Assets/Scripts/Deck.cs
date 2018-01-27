@@ -31,4 +31,10 @@ public class Deck : MonoBehaviour {
         size--;
         return true;
     }
+
+    private void OnMouseUpAsButton()
+    {
+        if (size > 0)
+            Hand.Instance.AddCard();
+    }
 }
