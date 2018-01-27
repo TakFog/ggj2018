@@ -8,6 +8,7 @@ public class Workbench : MonoBehaviour {
     public CardVisualizer Chest;
     public CardVisualizer Legs;
 
+    private AudioSource audio;
 
 
     private static Workbench inst;
@@ -21,6 +22,7 @@ public class Workbench : MonoBehaviour {
     void Awake()
     {
         Instance = this;
+        audio = GetComponent<AudioSource>();
     }
 
     public void SetHead(CardVisualizer head)
@@ -61,5 +63,6 @@ public class Workbench : MonoBehaviour {
         Legs.UpdateCard();
 
         Debug.Log("Card Update");
+        audio.Play();
     }
 }

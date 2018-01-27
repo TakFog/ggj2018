@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Shelf : MonoBehaviour
 {
+    private AudioSource audio;
+
     // SIngleton Stuff
     private static Shelf inst;
     public static Shelf Instance
@@ -12,7 +14,10 @@ public class Shelf : MonoBehaviour
         get { return inst; }
         private set { inst = value; }
     }
-    void Awake(){Instance = this;}
+    void Awake(){
+        audio = GetComponent<AudioSource>();
+        Instance = this;
+    }
 
 
     // Actual Usefull things--------------------
@@ -39,6 +44,11 @@ public class Shelf : MonoBehaviour
         Legs.UpdateCard();
     }
 
+    public void EmptyGolem()
+    {
+        PopGolem();
+    }
+
     public Golem PopGolem()
     {
         Head.card.part = BodyPart.None;
@@ -48,6 +58,7 @@ public class Shelf : MonoBehaviour
         Head.UpdateCard();
         Chest.UpdateCard();
         Legs.UpdateCard();
+        audio.Play();
 
         Golem tmp = golem;
         golem = null;
