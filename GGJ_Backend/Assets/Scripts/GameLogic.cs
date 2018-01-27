@@ -11,17 +11,26 @@ public class Card
     public int defence;
     public float speed;
     public int graphictype;
+
+    public Card(BodyPart part, int attack, int defence, float speed, int graphictype)
+    {
+        this.part = part ;
+        this.attack = attack;
+        this.defence = defence;
+        this.speed = speed;
+        this.graphictype = graphictype;
+    }
 }
 
 public class Golem
 {
-    public Card Head;
-    public Card Chest;
-    public Card Legs;
+    public Card Head = null;
+    public Card Chest = null;
+    public Card Legs = null;
 
     public Golem(Card head, Card chest, Card legs)
     {
-        Debug.Assert(Head != null && Chest != null && Legs != null);
+        Debug.Assert(head != null && chest != null && legs != null);
         this.Head = head;
         this.Chest = chest;
         this.Legs = legs;
