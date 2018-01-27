@@ -7,6 +7,8 @@ public class Deck : MonoBehaviour {
     public int size = 0;
     public bool canDraw = true;
     private MovingCard movingScript;
+    private AudioSource audio;
+    public AudioClip newCardAudio, drawAudio;
 
     private static Deck inst;
     public static Deck Instance
@@ -20,6 +22,7 @@ public class Deck : MonoBehaviour {
     {
         Instance = this;
         movingScript = movingCard.GetComponent<MovingCard>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -30,6 +33,7 @@ public class Deck : MonoBehaviour {
     public void AddCard()
     {
         if (size == 99) return;
+        audio.PlayOneShot(newCardAudio);
         size++;
         UpdateSize();
     }
@@ -39,6 +43,7 @@ public class Deck : MonoBehaviour {
         if (size == 0 || !canDraw) return false;
         canDraw = false;
         movingScript.enabled = true;
+        audio.PlayOneShot(drawAudio);
         size--;
         UpdateSize();
         return true;

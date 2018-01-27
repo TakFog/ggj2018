@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChanibaL;
 
 public enum BodyPart { None, Head, Chest, Legs };
 
@@ -62,7 +63,7 @@ public class Card
         }
         else
         {
-            attack = Random.Range(1, MAX_ATTRIBUTE+1);
+            attack = RandomGenerator.global.GetIntRange(1, MAX_ATTRIBUTE);
             defence = MAX_ATTRIBUTE - attack + 1;
         }
     }

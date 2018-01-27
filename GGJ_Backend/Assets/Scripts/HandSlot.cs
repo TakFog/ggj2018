@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class HandSlot : MonoBehaviour {
     public GameObject cardPrefab;
     private CardVisualizer cardVis;
+    private AudioSource audio;
 
     void Awake()
     {
+        audio = GetComponent<AudioSource>();
         GameObject cardObj = Instantiate(cardPrefab, transform);
         cardVis = cardObj.GetComponent<CardVisualizer>();
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -51,6 +53,7 @@ public class HandSlot : MonoBehaviour {
     {
         Card card = cardVis.card;
         if (card.IsNull || !cardVis.cardEnabled) return;
+        audio.Play();
         switch(card.part)
         {
             case BodyPart.Head:

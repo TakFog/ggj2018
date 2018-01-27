@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChanibaL;
 
 public class Hand : MonoBehaviour {
     public HandSlot[] slots;
@@ -9,6 +10,8 @@ public class Hand : MonoBehaviour {
     public MovingCard slidingCard;
     public CardVisualizer slidingCardVis;
     public Transform slidingStart;
+    private AudioSource audio;
+    public RadioMaria radio;
 
     private static Hand inst;
     public static Hand Instance
@@ -21,6 +24,7 @@ public class Hand : MonoBehaviour {
     void Awake()
     {
         Instance = this;
+        audio = GetComponent<AudioSource>();
     }
 
     public void Damage()
@@ -30,6 +34,7 @@ public class Hand : MonoBehaviour {
         {
             i--;
         }
+        if (i < 0) return;
         slots[i].SlotEnabled = false;
         i--;
         for(; i>=0; i--)
@@ -37,6 +42,9 @@ public class Hand : MonoBehaviour {
             slots[i].Card.SetNull();
             slots[i].UpdateCard();
         }
+        audio.Play();
+        Camera.main.GetComponent<CameraShake>().StartShake();
+        radio.PlayRadio();
     }
 
     public void AddCard()
@@ -117,7 +125,7 @@ public class Hand : MonoBehaviour {
 
     private BodyPart randomPart()
     {
-        switch (Random.Range(0, 3))
+        switch (RandomGenerator.global.GetIntRange(0, 2))
         {
             case 0:
                 return BodyPart.Head;
@@ -131,7 +139,7 @@ public class Hand : MonoBehaviour {
 
     private BodyPart randomPart(BodyPart p1, BodyPart p2)
     {
-        if (Random.Range(0, 2) == 0)
+        if (RandomGenerator.global.GetBool())
             return p1;
         else
             return p2;
