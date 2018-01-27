@@ -15,6 +15,27 @@ public class Card
     public float speed;
     public int graphictype;
 
+    public void Swap(Card card)
+    {
+        int tempattack = card.attack;
+        int tempdefence = card.defence;
+        float tempspeed = card.speed;
+        BodyPart temppart = card.part;
+        int tempgraphictype = card.graphictype;
+
+        this.attack = card.attack;
+        this.defence = card.defence;
+        this.speed = card.speed;
+        this.part = card.part;
+        this.graphictype = card.graphictype;
+
+        card.attack  = tempattack;
+        card.defence = tempdefence;
+        card.speed = tempspeed;
+        card.part = temppart;
+        card.graphictype = tempgraphictype;
+    }
+
     public bool IsNull
     {
         get { return part == BodyPart.None; }
@@ -58,26 +79,6 @@ public class Golem
 }
 
 
-public class Workbench
-{
-    Card Head = null;
-    Card Chest = null;
-    Card Legs = null;
 
-    public void generateGolem()
-    {
-        //if one of the cards is empty
-        if (Head == null || Chest == null || Legs == null)
-            return;    
-
-        Golem golem = new Golem(Head,Chest,Legs);
-        /*if (!Scaffale.full())
-            Scaffale.load(golem)
-         */
-        Head = null;
-        Chest = null;
-        Legs = null;
-    }
-}
 
 
