@@ -56,8 +56,9 @@ public class CardVisualizer : MonoBehaviour {
         }
         else
         {
-            partImage.enabled = false;
+            SetFrontActive(false);
             cardBg.sprite = CardManager.Instance.destroyed;
+            cardBg.enabled = true;
         }
     }
 
@@ -66,5 +67,6 @@ public class CardVisualizer : MonoBehaviour {
         partImage.enabled = active;
         attack.enabled = active;
         defence.enabled = active;
+        cardBg.enabled = active;
     }
 }

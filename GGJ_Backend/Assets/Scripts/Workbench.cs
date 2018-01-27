@@ -8,6 +8,19 @@ public class Workbench : MonoBehaviour {
     public CardVisualizer Chest;
     public CardVisualizer Legs;
 
+    private static Workbench inst;
+    public static Workbench Instance
+    {
+        get { return inst; }
+        private set { inst = value; }
+    }
+
+    // Use this for initialization
+    void Awake()
+    {
+        Instance = this;
+    }
+
     public void SetHead(CardVisualizer head)
     {
         Head.card.Swap(head.card);

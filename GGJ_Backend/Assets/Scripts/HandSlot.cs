@@ -49,6 +49,19 @@ public class HandSlot : MonoBehaviour {
 
     public void OnMouseUpAsButton()
     {
-        Debug.Log("click");
+        Card card = cardVis.card;
+        if (card.IsNull || !cardVis.cardEnabled) return;
+        switch(card.part)
+        {
+            case BodyPart.Head:
+                Workbench.Instance.SetHead(cardVis);
+                break;
+            case BodyPart.Chest:
+                Workbench.Instance.SetChest(cardVis);
+                break;
+            case BodyPart.Legs:
+                Workbench.Instance.SetLegs(cardVis);
+                break;
+        }
     }
 }

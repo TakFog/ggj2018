@@ -17,11 +17,11 @@ public class Card
 
     public void Swap(Card card)
     {
-        int tempattack = card.attack;
-        int tempdefence = card.defence;
-        float tempspeed = card.speed;
-        BodyPart temppart = card.part;
-        int tempgraphictype = card.graphictype;
+        int tempattack = this.attack;
+        int tempdefence = this.defence;
+        float tempspeed = this.speed;
+        BodyPart temppart = this.part;
+        int tempgraphictype = this.graphictype;
 
         this.attack = card.attack;
         this.defence = card.defence;
