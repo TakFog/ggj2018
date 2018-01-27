@@ -5,31 +5,33 @@ using UnityEngine;
 
 public class Shelf : MonoBehaviour
 {
-    /*
-    public Sprite[] parts;
-    public Sprite emptySlot;
-    public Sprite destroyed;
-    public Sprite back;*/
 
-
+    // SIngleton Stuff
     private static Shelf inst;
     public static Shelf Instance
     {
         get { return inst; }
         private set { inst = value; }
     }
+    void Awake(){Instance = this;}
 
-    // Use this for initialization
-    void Awake()
-    {
-        Instance = this;
-    }
 
+    // Actual Usefull things--------------------
 
     public Golem golem = null;
 
-    public bool IsGolemReady()
+    public bool IsGolemReady(){return golem != null;}
+
+    public void LoadGolem(Golem golem)
     {
-        return golem != null;
+        Debug.Assert(golem == null);
+        this.golem = golem;
+    }
+
+    public Golem PopGolem()
+    {
+        Golem tmp = golem;
+        golem = null;
+        return tmp;
     }
 }

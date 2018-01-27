@@ -5,13 +5,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
-
 public class NetworkClasses : MonoBehaviour {
     const int CARD_RECEIVE  = 1000;
     const int REQ_RECEIVE   = 1001;
     const int REQ_RESPONSE  = 1001;
     const int DEM_RECEIVE   = 1002;
-    const int PORT = 3000;
+    const int PORT          = 3000;
 
     void Start()
     {
@@ -25,30 +24,24 @@ public class NetworkClasses : MonoBehaviour {
     {
         Debug.Log("Golem Request Received");
 
-        //if (Shelf.Instance.IsGolemReady())
+        if (Shelf.Instance.IsGolemReady())
         {
-            //Golem g = Shelf.Instance.golem;
-
-            /*
-            Card head = new Card(BodyPart.Head, 0, 2, 0, 0);
-            Card chest = new Card(BodyPart.Chest, 0, 2, 0, 0);
-            Card legs = new Card(BodyPart.Legs, 0, 0, 1, 0);
-            Golem g = new Golem(head, chest, legs);
-            
-
+            Golem g = Shelf.Instance.PopGolem();
             string msg = JsonUtility.ToJson(new CardMessage(g));
-            netMsg.conn.Send(REQ_RESPONSE, new StringMessage(msg));*/
+            netMsg.conn.Send(REQ_RESPONSE, new StringMessage(msg));
         }
     }
 
     void OnDamageReceived(NetworkMessage netMsg)
     {
         Debug.Log("Damage Received");
+        Hand.Instance.Damage();
     }
 
     void OnCardReceived(NetworkMessage netMsg)
     {
         Debug.Log("Card Received");
+        Deck.Instance.AddCard();
     }
 }
 
