@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NumberManager : MonoBehaviour {
-    public Sprite[] num;
+    public Sprite[] card, deck;
 
     private static NumberManager inst;
     public static NumberManager Instance
