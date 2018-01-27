@@ -4,25 +4,40 @@ using UnityEngine;
 
 public class Workbench : MonoBehaviour {
 
-    Card Head = new Card();
-    Card Chest = new Card();
-    Card Legs = new Card();
+    public CardVisualizer Head;
+    public CardVisualizer Chest;
+    public CardVisualizer Legs;
 
-    public void SetHead(Card head)  {Head.Swap(head);}
-    public void SetChest(Card chest){Chest.Swap(chest);}
-    public void SetLegs(Card legs)  {Legs.Swap(legs);}
+    public void SetHead(CardVisualizer head)
+    {
+        Head.card.Swap(head.card);
+        head.UpdateCard();
+        this.Head.UpdateCard();
+    }
+    public void SetChest(CardVisualizer chest)
+    {
+        Chest.card.Swap(chest.card);
+        chest.UpdateCard();
+        this.Chest.UpdateCard();
+    }
+    public void SetLegs(CardVisualizer legs)
+    {
+        Legs.card.Swap(legs.card);
+        legs.UpdateCard();
+        this.Legs.UpdateCard();
+    }
 
     public void generateGolem()
     {
         //if one of the cards is empty
-        if (Head.IsNull || Chest.IsNull || Legs.IsNull || Shelf.Instance.IsGolemReady())
+        if (Head.card.IsNull || Chest.card.IsNull || Legs.card.IsNull || Shelf.Instance.IsGolemReady())
             return;
 
-        Golem golem = new Golem(Head, Chest, Legs);
+        Golem golem = new Golem(Head.card, Chest.card, Legs.card);
         Shelf.Instance.LoadGolem(golem);
 
-        Head.part = BodyPart.None;
-        Chest.part = BodyPart.None;
-        Legs.part = BodyPart.None;
+        Head.card.part = BodyPart.None;
+        Chest.card.part = BodyPart.None;
+        Legs.card.part = BodyPart.None;
     }
 }
