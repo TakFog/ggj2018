@@ -18,7 +18,17 @@ public class NetworkClasses : MonoBehaviour {
         NetworkServer.RegisterHandler(REQ_RECEIVE, OnRequestGolem);
         NetworkServer.RegisterHandler(DEM_RECEIVE, OnDamageReceived);
         NetworkServer.Listen(PORT);
+
+       /* NetworkClient client = new NetworkClient();
+        client.RegisterHandler(MsgType.Connect, OnConnected);
+        client.Connect("localhost", 3000);*/
     }
+
+    
+    /*private void OnConnected(NetworkMessage netMsg)
+    {
+        netMsg.conn.Send(REQ_RECEIVE, new EmptyMessage());
+    }*/
 
     void OnRequestGolem(NetworkMessage netMsg)
     {
