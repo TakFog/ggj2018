@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour {
     public HandSlot[] slots;
+    public int freeSlot;
+    public BodyPart newPart;
+    public MovingCard slidingCard;
+    public CardVisualizer slidingCardVis;
+    public Transform slidingStart;
 
     private static Hand inst;
     public static Hand Instance
@@ -32,13 +37,11 @@ public class Hand : MonoBehaviour {
             slots[i].Card.SetNull();
             slots[i].UpdateCard();
         }
-        //gestire tempi di animazione
-        Deck.Instance.DrawCard();
     }
 
     public void AddCard()
     {
-        int freeSlot = -1;
+        freeSlot = -1;
         int heads = 0, chests = 0, legs = 0, empty = 0;
         for(int i=0; i<slots.Length; i++)
         {
@@ -73,8 +76,6 @@ public class Hand : MonoBehaviour {
         if (empty == 0) return;
         if (!Deck.Instance.DrawCard()) return;
 
-        BodyPart newPart;
-
         switch (empty)
         {
             case 1:
@@ -107,12 +108,11 @@ public class Hand : MonoBehaviour {
                 break;
         }
 
-        Card card = slots[freeSlot].Card;
+        Card card = slidingCardVis.card;
         card.part = newPart;
         CardDatabase.Instance.RandomGraphic(card);
         card.GenerateAttributes();
-        slots[freeSlot].UpdateCard();
-        
+        slidingCardVis.UpdateCard();
     }
 
     private BodyPart randomPart()
@@ -148,5 +148,27 @@ public class Hand : MonoBehaviour {
         {
             AddCard();
         }
+    }
+
+    public void StartSlideIn()
+    {
+        slidingCard.end = slots[freeSlot].transform;
+        Vector3 endPos = slidingCard.end.position;
+        slidingStart.position = new Vector3(endPos.x, slidingStart.position.y, slidingStart.position.z);
+        slidingCard.start = slidingStart;
+        slidingCard.enabled = true;
+    }
+
+    public void EndSlideIn()
+    {
+        Card src = slidingCardVis.card;
+        Card card = slots[freeSlot].Card;
+        card.attack = src.attack;
+        card.defence = src.defence;
+        card.speed = src.speed;
+        card.part = src.part;
+        card.graphictype = src.graphictype;
+        slots[freeSlot].UpdateCard();
+        Deck.Instance.canDraw = true;
     }
 }
