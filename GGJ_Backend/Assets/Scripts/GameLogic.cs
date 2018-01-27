@@ -37,6 +37,24 @@ public class Card
         card.graphictype = tempgraphictype;
     }
 
+    public Card(Card src)
+    {
+        attack = src.attack;
+        defence = src.defence;
+        speed = src.speed;
+        part = src.part;
+        graphictype = src.graphictype;
+    }
+
+    public Card()
+    {
+        attack = 0;
+        defence = 0;
+        speed = 0;
+        part = BodyPart.None;
+        graphictype = 0;
+    }
+
     public bool IsNull
     {
         get { return part == BodyPart.None; }
@@ -78,9 +96,9 @@ public class Golem
     public Golem(Card head, Card chest, Card legs)
     {
         Debug.Assert(head != null && chest != null && legs != null);
-        this.Head = head;
-        this.Chest = chest;
-        this.Legs = legs;
+        this.Head = new Card(head);
+        this.Chest = new Card(chest);
+        this.Legs = new Card(legs);
     }
 }
 

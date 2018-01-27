@@ -8,6 +8,8 @@ public class Workbench : MonoBehaviour {
     public CardVisualizer Chest;
     public CardVisualizer Legs;
 
+
+
     private static Workbench inst;
     public static Workbench Instance
     {
@@ -53,8 +55,11 @@ public class Workbench : MonoBehaviour {
         Chest.card.part = BodyPart.None;
         Legs.card.part = BodyPart.None;
 
+        Debug.Log("card none");
         Head.UpdateCard();
         Chest.UpdateCard();
         Legs.UpdateCard();
+
+        Debug.Log("Card Update");
     }
 }

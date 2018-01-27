@@ -19,7 +19,7 @@ public class NetworkClasses : MonoBehaviour {
         NetworkServer.RegisterHandler(DEM_RECEIVE, OnDamageReceived);
         NetworkServer.Listen(PORT);
 
-       /* NetworkClient client = new NetworkClient();
+       /*NetworkClient client = new NetworkClient();
         client.RegisterHandler(MsgType.Connect, OnConnected);
         client.Connect("localhost", 3000);*/
     }
