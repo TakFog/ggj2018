@@ -4,89 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HandSlot : MonoBehaviour {
-    public SpriteRenderer partImage, cardBg, attack, defence;
-    public GameObject frontData;
-    public Card _card = new Card();
-    public bool _enabled = true;
+    public GameObject cardPrefab;
+    private CardVisualizer cardVis;
 
-    void Start()
+    void Awake()
     {
-        UpdateCard();
-    }
-
-    public Card Card
-    {
-        get { return _card;  }
-        set
-        {
-            _card = value;
-            UpdateCard();
-        }
-    }
-
-    public void UpdateCard()
-    {
-        if (_enabled)
-        {
-            bool isActive = _card.part != BodyPart.None;
-            frontData.SetActive(isActive);
-            if (isActive)
-            {
-                switch(_card.part)
-                {
-                    case BodyPart.Head:
-                        cardBg.sprite = CardManager.Instance.head;
-                        break;
-                    case BodyPart.Chest:
-                        cardBg.sprite = CardManager.Instance.chest;
-                        break;
-                    case BodyPart.Legs:
-                        if (_card.speed == 0)
-                            cardBg.sprite = CardManager.Instance.staticLeg;
-                        else
-                            cardBg.sprite = CardManager.Instance.movingLeg;
-                        break;
-                }
-                partImage.sprite = CardManager.Instance.parts[_card.graphictype];
-
-                attack.sprite = NumberManager.Instance.num[_card.attack];
-                if (_card.part == BodyPart.Legs)
-                {
-                    defence.enabled = false;
-                } 
-                else
-                {
-                    defence.enabled = true;
-                    defence.sprite = NumberManager.Instance.num[_card.defence];
-                }
-            }
-            else
-            {
-                frontData.SetActive(false);
-                cardBg.sprite = CardManager.Instance.emptySlot;
-            }
-        }
-        else
-        {
-            partImage.enabled = false;
-            cardBg.sprite = CardManager.Instance.destroyed;
-        }
+        GameObject cardObj = Instantiate(cardPrefab, transform);
+        cardVis = cardObj.GetComponent<CardVisualizer>();
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null) sr.enabled = false;
     }
 
     public bool SlotEnabled
     {
-        get { return _enabled;  }
+        get { return cardVis.cardEnabled;  }
         set {
-            _enabled = value;
+            cardVis.cardEnabled = value;
             UpdateCard();
         }
+    }
+
+    public Card Card
+    {
+        get { return cardVis.card; }
+    }
+
+    public void UpdateCard()
+    {
+        cardVis.UpdateCard();
     }
 
     public bool IsFree
     {
         get
         {
-            return _enabled && _card == null;
+            return cardVis.cardEnabled && cardVis.card.IsNull;
         }
     }
     

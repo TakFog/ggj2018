@@ -29,7 +29,7 @@ public class Hand : MonoBehaviour {
         i--;
         for(; i>=0; i--)
         {
-            slots[i].Card = null;
+            slots[i].Card.SetNull();
         }
         //gestire tempi di animazione
         Deck.Instance.DrawCard();
@@ -138,7 +138,10 @@ public class Hand : MonoBehaviour {
 
     public void DebugCards()
     {
-        slots[0].Card.part = BodyPart.None;
-        AddCard();
+        for(int i=0; i<slots.Length; i++)
+        {
+            slots[i].Card.SetNull();
+            AddCard();
+        }
     }
 }

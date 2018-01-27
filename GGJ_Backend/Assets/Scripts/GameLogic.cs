@@ -41,6 +41,11 @@ public class Card
         get { return part == BodyPart.None; }
     }
 
+    public void SetNull()
+    {
+        part = BodyPart.None;
+    }
+
     public void GenerateAttributes()
     {
         if (part == BodyPart.Legs)
