@@ -6,6 +6,7 @@ using UnityEngine;
 public class Shelf : MonoBehaviour
 {
     private AudioSource audio;
+    private MovingCard moving;
 
     // SIngleton Stuff
     private static Shelf inst;
@@ -16,6 +17,7 @@ public class Shelf : MonoBehaviour
     }
     void Awake(){
         audio = GetComponent<AudioSource>();
+        moving = GetComponent<MovingCard>();
         Instance = this;
     }
 
@@ -27,7 +29,14 @@ public class Shelf : MonoBehaviour
     public CardVisualizer Legs;
     public Golem golem = null;
 
-    public bool IsGolemReady(){return golem != null;}
+    public bool IsGolemReady(){
+        return golem != null;
+    }
+
+    public bool CannotBuildGolem()
+    {
+        return golem != null || moving.enabled;
+    }
 
     public void LoadGolem(Golem golem)
     {
@@ -42,14 +51,9 @@ public class Shelf : MonoBehaviour
         Head.UpdateCard();
         Chest.UpdateCard();
         Legs.UpdateCard();
-    }
+    } 
 
     public void EmptyGolem()
-    {
-        PopGolem();
-    }
-
-    public Golem PopGolem()
     {
         Head.card.part = BodyPart.None;
         Chest.card.part = BodyPart.None;
@@ -58,10 +62,20 @@ public class Shelf : MonoBehaviour
         Head.UpdateCard();
         Chest.UpdateCard();
         Legs.UpdateCard();
+        golem = null;
+    }
+
+    public void InternalPopGolem()
+    {
+        PopGolem();
+    }
+
+    public Golem PopGolem()
+    {
         audio.Play();
+        moving.enabled = true;
 
         Golem tmp = golem;
-        golem = null;
         return tmp;
     }
 }

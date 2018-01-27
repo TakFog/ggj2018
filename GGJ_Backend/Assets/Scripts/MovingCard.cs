@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingCard : MonoBehaviour {
     public Transform start, end;
     public float moveTotalTime, movingTime;
-    public bool slideOut;
+    public MovingType slideType;
 
     public SpriteRenderer renderer;
 
@@ -30,21 +30,25 @@ public class MovingCard : MonoBehaviour {
             this.enabled = false;
             if (renderer != null) renderer.enabled = false;
             transform.position = start.position;
-            if (slideOut) EndOut(); else EndIn();
+            switch (slideType)
+            {
+                case MovingType.In:
+                    Hand.Instance.EndSlideIn();
+                    break;
+                case MovingType.Out:
+                    Hand.Instance.StartSlideIn();
+                    break;
+                case MovingType.Shelf:
+                    Shelf.Instance.EmptyGolem();
+                    break;
+            }
             return;
         }
         movingTime -= Time.deltaTime;
         transform.position = Vector3.Lerp(start.position, end.position, 1 - movingTime / moveTotalTime);
     }
-
-    private void EndOut()
-    {
-        Hand.Instance.StartSlideIn();
-    }
-
-    private void EndIn()
-    {
-        Hand.Instance.EndSlideIn();
-    }
+    
 
 }
+
+public enum MovingType { In, Out, Shelf }
