@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BodyPart {Head, Chest, Legs };
+public enum BodyPart { None, Head, Chest, Legs };
 
+[System.Serializable]
 public class Card
 {
-    public const int MAX_ATTRIBUTE = 10;
+    public const int MAX_ATTRIBUTE = 9;
 
-    public BodyPart part;
+    public BodyPart part = BodyPart.None;
     public int attack;
     public int defence;
     public float speed;
     public int graphictype;
+
+    public bool IsNull
+    {
+        get { return part == BodyPart.None; }
+    }
 
     public void GenerateAttributes()
     {
@@ -30,8 +36,8 @@ public class Card
         }
         else
         {
-            attack = Random.Range(0, MAX_ATTRIBUTE + 1);
-            defence = MAX_ATTRIBUTE - attack;
+            attack = Random.Range(1, MAX_ATTRIBUTE+1);
+            defence = MAX_ATTRIBUTE - attack + 1;
         }
     }
 }

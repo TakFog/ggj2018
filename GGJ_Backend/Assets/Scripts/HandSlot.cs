@@ -4,9 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HandSlot : MonoBehaviour {
-    public Image partImage, cardBg;
-    public Card _card = null;
+    public SpriteRenderer partImage, cardBg, attack, defence;
+    public GameObject frontData;
+    public Card _card = new Card();
     public bool _enabled = true;
+
+    void Start()
+    {
+        UpdateCard();
+    }
 
     public Card Card
     {
@@ -18,18 +24,45 @@ public class HandSlot : MonoBehaviour {
         }
     }
 
-    private void UpdateCard()
+    public void UpdateCard()
     {
         if (_enabled)
         {
-            partImage.enabled = _card != null;
-            if (partImage.enabled)
+            bool isActive = _card.part != BodyPart.None;
+            frontData.SetActive(isActive);
+            if (isActive)
             {
-                cardBg.sprite = CardManager.Instance.back;
+                switch(_card.part)
+                {
+                    case BodyPart.Head:
+                        cardBg.sprite = CardManager.Instance.head;
+                        break;
+                    case BodyPart.Chest:
+                        cardBg.sprite = CardManager.Instance.chest;
+                        break;
+                    case BodyPart.Legs:
+                        if (_card.speed == 0)
+                            cardBg.sprite = CardManager.Instance.staticLeg;
+                        else
+                            cardBg.sprite = CardManager.Instance.movingLeg;
+                        break;
+                }
                 partImage.sprite = CardManager.Instance.parts[_card.graphictype];
+
+                attack.sprite = NumberManager.Instance.num[_card.attack];
+                if (_card.part == BodyPart.Legs)
+                {
+                    defence.enabled = false;
+                } 
+                else
+                {
+                    defence.enabled = true;
+                    defence.sprite = NumberManager.Instance.num[_card.defence];
+                }
             }
             else
             {
+                frontData.SetActive(false);
                 cardBg.sprite = CardManager.Instance.emptySlot;
             }
         }

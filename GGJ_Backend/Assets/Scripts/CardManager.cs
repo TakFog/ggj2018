@@ -7,6 +7,7 @@ public class CardManager : MonoBehaviour {
     public Sprite emptySlot;
     public Sprite destroyed;
     public Sprite back;
+    public Sprite head, chest, movingLeg, staticLeg;
 
     private static CardManager inst;
     public static CardManager Instance

@@ -64,7 +64,6 @@ public class CardDatabase {
                 {
                     pool = movingLegs;
                     card.speed = 1f;
-                    card.attack = 10;
                 }
                 break;
         }

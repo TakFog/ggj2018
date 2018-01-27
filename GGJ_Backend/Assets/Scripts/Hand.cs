@@ -37,7 +37,7 @@ public class Hand : MonoBehaviour {
 
     public void AddCard()
     {
-        if (!Deck.Instance.DrawCard()) return;
+        int freeSlot = -1;
         int heads = 0, chests = 0, legs = 0, empty = 0;
         for(int i=0; i<slots.Length; i++)
         {
@@ -45,9 +45,11 @@ public class Hand : MonoBehaviour {
             if (slot.SlotEnabled)
             {
                 Card c = slot.Card;
-                if (c == null)
+                if (c.IsNull)
                 {
                     empty++;
+                    if (freeSlot < 0)
+                        freeSlot = i;
                 }
                 else
                 {
@@ -67,12 +69,13 @@ public class Hand : MonoBehaviour {
             }
         }
 
+        if (empty == 0) return;
+        if (!Deck.Instance.DrawCard()) return;
+
         BodyPart newPart;
 
         switch (empty)
         {
-            case 0:
-                return;
             case 1:
                 if (heads == 0)
                     newPart = BodyPart.Head;
@@ -103,20 +106,12 @@ public class Hand : MonoBehaviour {
                 break;
         }
 
-        Card card = new Card();
+        Card card = slots[freeSlot].Card;
         card.part = newPart;
         CardDatabase.Instance.RandomGraphic(card);
         card.GenerateAttributes();
-
-        for(int i=0; i<slots.Length; i++)
-        {
-            if (slots[i].IsFree)
-            {
-                slots[i].Card = card;
-                break;
-            }
-               
-        }
+        slots[freeSlot].UpdateCard();
+        
     }
 
     private BodyPart randomPart()
@@ -139,5 +134,11 @@ public class Hand : MonoBehaviour {
             return p1;
         else
             return p2;
+    }
+
+    public void DebugCards()
+    {
+        slots[0].Card.part = BodyPart.None;
+        AddCard();
     }
 }
