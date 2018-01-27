@@ -24,8 +24,10 @@ public class Shelf : MonoBehaviour
 
     public void LoadGolem(Golem golem)
     {
-        Debug.Assert(golem == null);
+        Debug.Log("golem ready");
+        Debug.Assert(golem != null);
         this.golem = golem;
+
     }
 
     public Golem PopGolem()

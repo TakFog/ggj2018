@@ -52,5 +52,9 @@ public class Workbench : MonoBehaviour {
         Head.card.part = BodyPart.None;
         Chest.card.part = BodyPart.None;
         Legs.card.part = BodyPart.None;
+
+        Head.UpdateCard();
+        Chest.UpdateCard();
+        Legs.UpdateCard();
     }
 }
