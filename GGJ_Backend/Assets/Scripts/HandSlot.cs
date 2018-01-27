@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class HandSlot : MonoBehaviour {
     public Image partImage, cardBg;
-    public int _card;
+    public Card _card = null;
     public bool _enabled = true;
 
-    public int Card
+    public Card Card
     {
         get { return _card;  }
         set
@@ -22,11 +22,11 @@ public class HandSlot : MonoBehaviour {
     {
         if (_enabled)
         {
-            partImage.enabled = _card >= 0;
+            partImage.enabled = _card != null;
             if (partImage.enabled)
             {
                 cardBg.sprite = CardManager.Instance.back;
-                partImage.sprite = CardManager.Instance.parts[_card];
+                partImage.sprite = CardManager.Instance.parts[_card.graphictype];
             }
             else
             {
@@ -43,7 +43,18 @@ public class HandSlot : MonoBehaviour {
     public bool SlotEnabled
     {
         get { return _enabled;  }
-        set { }
+        set {
+            _enabled = value;
+            UpdateCard();
+        }
+    }
+
+    public bool IsFree
+    {
+        get
+        {
+            return _enabled && _card == null;
+        }
     }
     
 	// Update is called once per frame
