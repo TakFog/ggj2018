@@ -23,24 +23,38 @@ public class CardDatabase {
     {
 
         int i = 0;
-        heads = new int[2];
-        heads[i++] = 0;
-        heads[i++] = 1;
+        heads = new int[7];
+        heads[i++] = Constants.H_FISHBOWL;
+        heads[i++] = Constants.H_SNOWHEAD;
+        heads[i++] = Constants.H_CAT;
+        heads[i++] = Constants.H_UNITY;
+        heads[i++] = Constants.H_BULB;
+        heads[i++] = Constants.H_FUNNEL;
+        heads[i++] = Constants.H_FISH;
 
         i = 0;
-        chests = new int[2];
-        chests[i++] = 2;
-        chests[i++] = 3;
+        chests = new int[7];
+        chests[i++] = Constants.C_DONUT;
+        chests[i++] = Constants.C_SNOWBODY;
+        chests[i++] = Constants.C_BOX;
+        chests[i++] = Constants.C_TREE;
+        chests[i++] = Constants.C_MICROWAVE;
+        chests[i++] = Constants.C_BARREL;
+        chests[i++] = Constants.C_BAG;
 
         i = 0;
-        staticLegs = new int[2];
-        staticLegs[i++] = 4;
-        staticLegs[i++] = 5;
+        staticLegs = new int[4];
+        staticLegs[i++] = Constants.LS_SNOWLEG;
+        staticLegs[i++] = Constants.LS_ROOT;
+        staticLegs[i++] = Constants.LS_BIN;
+        staticLegs[i++] = Constants.LS_COLUMN;
 
         i = 0;
-        movingLegs = new int[2];
-        movingLegs[i++] = 4;
-        movingLegs[i++] = 5;
+        movingLegs = new int[3];
+        movingLegs[i++] = Constants.LM_WHEEL;
+        movingLegs[i++] = Constants.LM_SLIPPER;
+        movingLegs[i++] = Constants.LM_HEELS;
+
     }
 
     public void RandomGraphic(Card card)
