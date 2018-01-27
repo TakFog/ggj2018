@@ -1178,8 +1178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parts:
-  - {fileID: 21300000, guid: bae9c47aabcd4494da0186202481a176, type: 3}
-  - {fileID: 21300000, guid: 2a743eb7c41bfb64bba90ca8c27da59d, type: 3}
+  - {fileID: 21300000, guid: 84ad934e2270ed645a0e43c716358fda, type: 3}
+  - {fileID: 21300002, guid: 84ad934e2270ed645a0e43c716358fda, type: 3}
+  - {fileID: 21300004, guid: 84ad934e2270ed645a0e43c716358fda, type: 3}
+  - {fileID: 21300006, guid: 84ad934e2270ed645a0e43c716358fda, type: 3}
+  - {fileID: 21300008, guid: 84ad934e2270ed645a0e43c716358fda, type: 3}
+  - {fileID: 21300010, guid: 84ad934e2270ed645a0e43c716358fda, type: 3}
   emptySlot: {fileID: 21300000, guid: 0abef8848eded07479a1d9c5af0a5ba1, type: 3}
   destroyed: {fileID: 21300000, guid: f1fd1cf4d916b2d4a9ca38d1e9e0103d, type: 3}
   back: {fileID: 21300000, guid: e787667662040e849a826696d89b11cd, type: 3}

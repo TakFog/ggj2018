@@ -47,8 +47,8 @@ public class HandSlot : MonoBehaviour {
 		
 	}
 
-    public void OnClick()
+    public void OnMouseUpAsButton()
     {
-        UpdateCard();
+        Debug.Log("click");
     }
 }

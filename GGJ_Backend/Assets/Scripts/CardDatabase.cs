@@ -24,23 +24,23 @@ public class CardDatabase {
 
         int i = 0;
         heads = new int[2];
-        heads[i++] = Constants.PART_DONUT;
-        heads[i++] = Constants.PART_PENCIL;
+        heads[i++] = 0;
+        heads[i++] = 1;
 
         i = 0;
         chests = new int[2];
-        chests[i++] = Constants.PART_DONUT;
-        chests[i++] = Constants.PART_PENCIL;
+        chests[i++] = 2;
+        chests[i++] = 3;
 
         i = 0;
         staticLegs = new int[2];
-        staticLegs[i++] = Constants.PART_DONUT;
-        staticLegs[i++] = Constants.PART_PENCIL;
+        staticLegs[i++] = 4;
+        staticLegs[i++] = 5;
 
         i = 0;
         movingLegs = new int[2];
-        movingLegs[i++] = Constants.PART_DONUT;
-        movingLegs[i++] = Constants.PART_PENCIL;
+        movingLegs[i++] = 4;
+        movingLegs[i++] = 5;
     }
 
     public void RandomGraphic(Card card)
