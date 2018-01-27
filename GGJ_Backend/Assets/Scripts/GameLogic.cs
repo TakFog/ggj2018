@@ -44,13 +44,13 @@ public class Card
 
 public class Golem
 {
-    public Card Head;
-    public Card Chest;
-    public Card Legs;
+    public Card Head = null;
+    public Card Chest = null;
+    public Card Legs = null;
 
     public Golem(Card head, Card chest, Card legs)
     {
-        Debug.Assert(Head != null && Chest != null && Legs != null);
+        Debug.Assert(head != null && chest != null && legs != null);
         this.Head = head;
         this.Chest = chest;
         this.Legs = legs;
