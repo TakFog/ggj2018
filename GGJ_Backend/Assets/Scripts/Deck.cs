@@ -32,7 +32,6 @@ public class Deck : MonoBehaviour {
         if (size == 99) return;
         size++;
         UpdateSize();
-        Hand.Instance.AddCard();
     }
 
     public bool DrawCard()
