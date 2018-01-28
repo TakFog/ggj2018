@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ChanibaL;
+using UnityEngine.SceneManagement;
 
 public class Hand : MonoBehaviour {
     public HandSlot[] slots;
@@ -34,10 +35,21 @@ public class Hand : MonoBehaviour {
         {
             i--;
         }
+
+        if (i == 2)
+        {
+            SceneManager.LoadScene("GameOverScene");
+            return;
+        }
+
+
         if (i < 0) return;
         slots[i].SlotEnabled = false;
         i--;
-        for(; i>=0; i--)
+
+
+
+        for (; i>=0; i--)
         {
             slots[i].Card.SetNull();
             slots[i].UpdateCard();
@@ -45,6 +57,8 @@ public class Hand : MonoBehaviour {
         audio.Play();
         Camera.main.GetComponent<CameraShake>().StartShake();
         radio.PlayRadio();
+
+        
     }
 
     public void AddCard()
