@@ -50,6 +50,17 @@ public class NetworkClasses : MonoBehaviour {
         Debug.Log("Card Received");
         Deck.Instance.AddCard();
     }
+
+    public void EmulateClient()
+    {
+        NetworkClient client = new NetworkClient();
+        client.RegisterHandler(MsgType.Connect, OnConnected);
+        client.Connect("localhost", 3000);
+    }
+    private void OnConnected(NetworkMessage netMsg)
+    {
+        netMsg.conn.Send(REQ_RECEIVE, new EmptyMessage());
+    }
 }
 
 
@@ -118,16 +129,8 @@ public class CardMessage
         bodyMessage = null;
         legMessage = null;
     }
+
+
 }
 
 
-public void EmulateClient()
-{
-    NetworkClient client = new NetworkClient();
-    client.RegisterHandler(MsgType.Connect, OnConnected);
-    client.Connect("localhost", 3000);
-}
-private void OnConnected(NetworkMessage netMsg)
-{
-    netMsg.conn.Send(REQ_RECEIVE, new EmptyMessage());
-}

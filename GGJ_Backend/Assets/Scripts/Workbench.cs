@@ -7,6 +7,7 @@ public class Workbench : MonoBehaviour {
     public CardVisualizer Head;
     public CardVisualizer Chest;
     public CardVisualizer Legs;
+    public AudioClip buildClip, errorClip;
 
     private AudioSource audio;
 
@@ -48,7 +49,10 @@ public class Workbench : MonoBehaviour {
     {
         //if one of the cards is empty
         if (Head.card.IsNull || Chest.card.IsNull || Legs.card.IsNull || Shelf.Instance.IsGolemReady())
+        {
+            audio.PlayOneShot(errorClip);
             return;
+        }
 
         Golem golem = new Golem(Head.card, Chest.card, Legs.card);
         Shelf.Instance.LoadGolem(golem);
@@ -63,6 +67,6 @@ public class Workbench : MonoBehaviour {
         Legs.UpdateCard();
 
         Debug.Log("Card Update");
-        audio.Play();
+        audio.PlayOneShot(buildClip);
     }
 }

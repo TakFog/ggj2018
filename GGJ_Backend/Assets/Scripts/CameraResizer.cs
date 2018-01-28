@@ -16,7 +16,7 @@ public class CameraResizer : MonoBehaviour {
     {
         Vector3 vcam = -Camera.main.ScreenToWorldPoint(new Vector3(0, 0));
         Vector3 vbg = bg.GetComponent<Renderer>().bounds.extents;
-        float fx = vbg.x / vcam.x;
+        //float fx = vbg.x / vcam.x;
         float fy = vbg.y / vcam.y;
 
         Camera.main.orthographicSize *= fy; // Mathf.Max(fx, fy);
