@@ -12,23 +12,20 @@ public class NetworkClasses : MonoBehaviour {
     const int DEM_RECEIVE   = 1002;
     const int PORT          = 3000;
 
+   static bool activeServer = false;
+
     void Start()
     {
-        NetworkServer.RegisterHandler(CARD_RECEIVE, OnCardReceived);
-        NetworkServer.RegisterHandler(REQ_RECEIVE, OnRequestGolem);
-        NetworkServer.RegisterHandler(DEM_RECEIVE, OnDamageReceived);
-        NetworkServer.Listen(PORT);
+        if (!activeServer)
+        {
+            activeServer = true;
+            NetworkServer.RegisterHandler(CARD_RECEIVE, OnCardReceived);
+            NetworkServer.RegisterHandler(REQ_RECEIVE, OnRequestGolem);
+            NetworkServer.RegisterHandler(DEM_RECEIVE, OnDamageReceived);
+            NetworkServer.Listen(PORT);
+        }
 
-       /*NetworkClient client = new NetworkClient();
-        client.RegisterHandler(MsgType.Connect, OnConnected);
-        client.Connect("localhost", 3000);*/
     }
-
-    
-    /*private void OnConnected(NetworkMessage netMsg)
-    {
-        netMsg.conn.Send(REQ_RECEIVE, new EmptyMessage());
-    }*/
 
     void OnRequestGolem(NetworkMessage netMsg)
     {
@@ -121,4 +118,16 @@ public class CardMessage
         bodyMessage = null;
         legMessage = null;
     }
+}
+
+
+public void EmulateClient()
+{
+    NetworkClient client = new NetworkClient();
+    client.RegisterHandler(MsgType.Connect, OnConnected);
+    client.Connect("localhost", 3000);
+}
+private void OnConnected(NetworkMessage netMsg)
+{
+    netMsg.conn.Send(REQ_RECEIVE, new EmptyMessage());
 }
