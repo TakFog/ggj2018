@@ -1396,7 +1396,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a93f7c7a939947949bd8eac1450e5e63, type: 3}
   - {fileID: 8300000, guid: 0356a3d190f9fe846b5373da7d043c42, type: 3}
   musicSource: {fileID: 719571407}
-  index: 0
+  index: 1
   lowVolume: 0.3
 --- !u!1 &610124881
 GameObject:
