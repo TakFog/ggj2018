@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChanibaL;
 
 public class CardDatabase {
     public int[] heads;
@@ -69,7 +70,7 @@ public class CardDatabase {
                 pool = chests;
                 break;
             case BodyPart.Legs:
-                if (Random.Range(0, 100) > 50)
+                if (RandomGenerator.global.GetBool(0.5f))
                 {
                     pool = staticLegs;
                     card.speed = 0f;
