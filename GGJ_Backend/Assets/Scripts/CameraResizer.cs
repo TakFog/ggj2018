@@ -19,6 +19,6 @@ public class CameraResizer : MonoBehaviour {
         float fx = vbg.x / vcam.x;
         float fy = vbg.y / vcam.y;
 
-        Camera.main.orthographicSize *= Mathf.Max(fx, fy);
+        Camera.main.orthographicSize *= fy; // Mathf.Max(fx, fy);
     }
 }
