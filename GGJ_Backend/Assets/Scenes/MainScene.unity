@@ -1392,9 +1392,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip:
-  - {fileID: 8300000, guid: a93f7c7a939947949bd8eac1450e5e63, type: 3}
-  - {fileID: 8300000, guid: 0356a3d190f9fe846b5373da7d043c42, type: 3}
-  - {fileID: 8300000, guid: fc0bef877d4011544a5a092618945cc1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   musicSource: {fileID: 719571407}
   index: 0
   lowVolume: 0.3
@@ -2617,6 +2617,7 @@ MonoBehaviour:
   Legs: {fileID: 1566588653}
   buildClip: {fileID: 8300000, guid: 965318ff3b4b10f489aaa4bd81c29ad4, type: 3}
   errorClip: {fileID: 8300000, guid: 069ed0e1ad1a4b246ba994aef9e0640e, type: 3}
+  slotMachinecClip: {fileID: 8300000, guid: bd7beca05cf697b4fa26b4e6d9340232, type: 3}
 --- !u!82 &1222312348
 AudioSource:
   m_ObjectHideFlags: 0

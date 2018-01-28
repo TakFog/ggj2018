@@ -7,7 +7,7 @@ public class Workbench : MonoBehaviour {
     public CardVisualizer Head;
     public CardVisualizer Chest;
     public CardVisualizer Legs;
-    public AudioClip buildClip, errorClip;
+    public AudioClip buildClip, errorClip,slotMachinecClip;
 
     private AudioSource audio;
 
@@ -57,16 +57,25 @@ public class Workbench : MonoBehaviour {
         Golem golem = new Golem(Head.card, Chest.card, Legs.card);
         Shelf.Instance.LoadGolem(golem);
 
+        if (Head.card.graphictype == Constants.H_SNOWHEAD 
+            && Chest.card.graphictype == Constants.C_SNOWBODY 
+            && Legs.card.graphictype==Constants.LS_SNOWLEG)
+        {
+            audio.PlayOneShot(slotMachinecClip);
+        }
+        else
+            audio.PlayOneShot(buildClip);
+
+
         Head.card.part = BodyPart.None;
         Chest.card.part = BodyPart.None;
         Legs.card.part = BodyPart.None;
 
-        Debug.Log("card none");
         Head.UpdateCard();
         Chest.UpdateCard();
         Legs.UpdateCard();
 
-        Debug.Log("Card Update");
-        audio.PlayOneShot(buildClip);
+        
+        
     }
 }

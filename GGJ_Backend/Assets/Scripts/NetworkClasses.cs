@@ -73,6 +73,7 @@ public class BodyMessage
 
     public BodyMessage(Card chest)
     {
+        id = chest.graphictype;
         attack = chest.attack;
         defense = chest.defence;
     }
@@ -87,6 +88,7 @@ public class HeadMessage
 
     public HeadMessage(Card head)
     {
+        id = head.graphictype;
         attack = head.attack;
         defense = head.defence;
     }
@@ -101,6 +103,7 @@ public class LegMessage
 
     public LegMessage(Card legs)
     {
+        id = legs.graphictype;
         attack = legs.attack;
         speed = legs.speed;
     }
