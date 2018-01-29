@@ -70,7 +70,7 @@ public class CardDatabase {
                 pool = chests;
                 break;
             case BodyPart.Legs:
-                if (RandomGenerator.global.GetBool(0.5f))
+                if (RandomGenerator.global.GetBool(0.7f))
                 {
                     pool = staticLegs;
                     card.speed = 0f;

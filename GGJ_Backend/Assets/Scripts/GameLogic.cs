@@ -8,7 +8,7 @@ public enum BodyPart { None, Head, Chest, Legs };
 [System.Serializable]
 public class Card
 {
-    public const int MAX_ATTRIBUTE = 9;
+    public const int MAX_ATTRIBUTE = 7;
 
     public BodyPart part = BodyPart.None;
     public int attack;
@@ -82,7 +82,7 @@ public class Card
         else
         {
             attack = RandomGenerator.global.GetIntRange(1, MAX_ATTRIBUTE);
-            defence = MAX_ATTRIBUTE - attack + 1;
+            defence = MAX_ATTRIBUTE - attack + 3;
         }
     }
 }

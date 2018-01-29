@@ -37,6 +37,11 @@ public class NetworkClasses : MonoBehaviour {
             string msg = JsonUtility.ToJson(new CardMessage(g));
             netMsg.conn.Send(REQ_RESPONSE, new StringMessage(msg));
         }
+        else
+        {
+            string msg = JsonUtility.ToJson(new CardMessage());
+            netMsg.conn.Send(REQ_RESPONSE, new StringMessage(msg));
+        }
     }
 
     void OnDamageReceived(NetworkMessage netMsg)
